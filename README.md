@@ -73,6 +73,7 @@ BUG REPORT
 
 I am very pleased to have any information related to bug or 
 any suggestion for improvement. Please send the message to
-kiyoshi@tg.rim.or.jp
+kiwatana@hotmail.co.jp
+kiwatanag@gmail.com
 
 
