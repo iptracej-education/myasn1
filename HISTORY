@@ -1,0 +1,210 @@
+5/02
+
+improve error handlings
+        1) when no byte specified
+        2) when no length byte specified
+        3) when zero length specified except in Universal Null tag
+        4) when negative value is specified
+        5) when the indefinite form is specified
+        6) when the length octets exceeds 4 (This exceeds the
+                range of Long value)
+
+5/02
+
+readasn1.h and readasn1.c are updated to the new
+directory apps. This simplifies the current
+works for readasn1. Also read...functions are
+migrated to myASN1.c/h because this would eventually
+be there sooner or later. 
+
+Makefile is update at the top directory. So now you
+can make it at the top, just type make.
+
+The error handling and its actual tests are conducted
+now to at least have it usuable to everybody. I will 
+make it this the First Priority.
+
+
+4/29
+
+There are several options and improvements added.
+
+Options
+1) indenation option -i
+2) dump option -d
+3) hex representation option -x
+4) help option -h
+
+Improvements
+1) octet string value is now displayed with hex values
+   and visible strings ( "." used when control characters).
+2) switch-case statements are simplified.
+3) Almost all Universal Tags are in (REAL is the last 
+   one that myASN1 supports currently).
+
+
+4/24
+
+a version is completed. The readASN1 program now can read
+a X.509 binary file and display the ASN1 tag used and the
+actual values. There are several things to improve
+
+1) improve the data representation such as the first value
+   (what's representing?)
+2) error-checking functions
+3) long and int data type specification. Need to write
+   a specification when long or int used!
+4) need to check any content avairable before read the
+   actual data value from a file.
+  
+   The strategy would be to get the value and unget the value.
+
+5) create a concrete Makefile.
+
+...
+99) learn how to use a XP to incorporate into this program.
+
+
+4/17
+
+completed the character check functions for each String function
+(Numeric, Printable, Visible, and IA5 Strings). Now I am working
+for shaping the error handling structures and functions.
+
+4/16
+
+worked for readString function which contains the readNumericString
+function, readPrintableString function, readT61String function,
+readIA5String function, and readVisibleString function. All funcions
+contain the ASCII characters only. I am now developing the check 
+function that will check the validity of the characters for each
+string type.
+
+12/26
+
+started writing readInteger function.
+
+12/23
+
+I found a bug in readLength function and corrected it.
+I can see  a potential bug in the indefinite form when
+some bad asn1 file contains too long 0x00 prefixes before
+we reach the real value or when too long length value
+inside. We should detect them and accomodate the
+situations.  
+
+12/22
+
+I write the readLength function. I finished. I decide
+to write BER (not only DER) decoder. I believe that
+this can be done fairly in easy way.
+
+
+12/21
+
+Restart again. busy days go on recently. I started coding but
+the problem is that since the empty period of one month has
+passed, I do not remember what I am supporsed to do and
+what the problems are. This is really bad. So I decide to
+find a way to manage the project and status.
+
+I re-read the ffread.c source code. This is sort of experimental
+one, so I am not sure whether I should follow this way of doing
+for decoding the ASN1. But I think that this is a good start.
+
+I finished and polished the readTag. Also I checked with binary
+data. see myASN1/works/read/readTag.c and readtagtest.bin.   
+
+
+11/21
+
+Now trying to incorporate read.. function into myASN1 collection.
+Looking into at least useful function call, while maintining a
+consistency with write... function.
+  
+
+11/20
+
+The plan is to write ASN1 routine input function:
+	readObject
+        readOID
+        readInteger
+        readSequence
+        readSet
+        read..whatever..
+
+This will create a ASN1 DER decorder as a final output in c.
+
+
+
+11/19
+
+I wrote 4 functions, sizeofObject, sizeofContextObject, sizeofTag, sizeofLength
+and confirmed that they are working correctly. I integrated them into the 
+example main to construct a simple PKCS #7 ASN.1 code.
+
+11/18
+
+I realize that when you create a context-specific tag ASN.1 object
+with primitive type, i think that the function should be customized.
+
+     .....
+
+     [0] test Octet String
+     .....
+ 
+     T   L                 V
+    [0]  L for test value  Octet String
+
+    So that the type information is replaced by [0].
+
+    You might need to write a 
+
+    write_Context_OctetString function {
+      ....
+      writeContext(...) /* This will write T and L */
+      s2fwrite(...) /* This will write V */
+    } 
+
+I may have to find a better way to accomodate the above requirements.
+
+
+11/17
+
+I wrote the writeContext function to accomodate the context-specific
+tag such as [0], [1], ...[N]. I need to test further by integrating
+the other source code.
+
+
+11/16
+
+I am very sleepy. So I went to bed without doing any coding.
+
+
+11/15
+
+I have to create a function to set a Context-specific tag with
+integer, which means [0]... in ASN.1.
+
+So probably the name is writeContextTag(Stream *stream, int Number, int Length)
+
+10月23日
+
+■iconv libraryがようやく動くのが判明した。まだよく分かっていないのが、
+iconvを呼び出したときに、Return値の挙動。このReturn値は変換したキャラ
+クタの数だと思っていたが、example.cで試してみると Return 値はゼロにな
+る。Man ページで調べてみると、
+
+RETURN VALUE
+       The iconv function returns the number of characters converted  in
+       a non-reversible way during this call; reversible conversions are
+       not counted.  In  case  of  error,  it  sets  errno  and  returns
+       (iconv_t)(-1).
+
+なるが、このnon-reversible wayという言葉は意味不明。
+
+■格納する時に"\n"をデリミタとしてループを回し格納するのだが、
+  変換された後は、"\n"も変換されてしまう。例えば、ASCIIの"\n"から
+  EUC-JPの"\n"では、1 byte から 2 byteとなる。
+
+
