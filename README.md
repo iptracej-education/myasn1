@@ -1,4 +1,5 @@
 # myasn1
+# Time-stamp: <2018-09-15 22:15:21 kiyoshi>
 
 This project is an ASN1 encoding and decoding tool on
 Unix platform (developed at LINUX Redhat 5.2). It provides
