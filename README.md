@@ -1,7 +1,7 @@
 # myasn1
 # Time-stamp: <2018-09-15 22:15:21 kiyoshi>
 
-This project is aimed to build an fast ASN1 encoding and decoding code example on
+This project is aimed to build a fast ASN1 encoding and decoding code example on
 Unix platform (developed at LINUX Redhat 5.2). It provides
 basic functions in C to encode and decode ASN1 objects in
 BER or DER format. It will cover almost all
@@ -14,19 +14,26 @@ I hope that you enjoy it!
 OVERVIEW
 --------
 
-myASN1 tool includes:
+myASN1 code example includes:
 
  1) write functions. These will encode the data into ASN1 format
  2) read functions.  These will cedocde the ASN1 data into internal 
     format or dump them out in c
+
+All codes are stored in works directory. 
+
+In addition, you could incorporate the following code examples in your project. 
+
  3) sstream functions. These are file related functions 
  4) smemory functions. THere are memory functions (Malloc,Free...)
+
+These code examples are stored at the project level. 
 
 
 HOW TO USE  
 -------
 
-This is basically not an application so that you will never have to 
+This is not an application so that you will never have to 
 install. I am preparing a sample program to understand
 how to incorporate the functions in C source code. If you
 want to run the program, just type:
