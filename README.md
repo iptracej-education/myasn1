@@ -1,12 +1,12 @@
 # myasn1
 # Time-stamp: <2018-09-15 22:15:21 kiyoshi>
 
-This project is an ASN1 encoding and decoding tool on
+This project is aimed to build an fast ASN1 encoding and decoding code example on
 Unix platform (developed at LINUX Redhat 5.2). It provides
 basic functions in C to encode and decode ASN1 objects in
-BER or DER format( Actually DER only now ). It will cover almost all
+BER or DER format. It will cover almost all
 ASN1 tags including BMP and UTF8 strings necessary to encode and decode 
-all the ASN1 objects.
+all the ASN1 objects. 
 
 I hope that you enjoy it!
 
